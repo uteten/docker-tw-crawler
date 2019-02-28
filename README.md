@@ -17,7 +17,7 @@ use only docker almost all are docker
     `$ sudo docker run --name es -d  -p 9200:9200 -p 9300:9300  -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" elasticsearch:6.6.1`
 
 2. Run Kibana  
-    `$ sudo docker run --name kiba --link es:elasticsearch:6.6.1 -p 5601:5601 -d kibana`
+    `$ sudo docker run --name kiba --link es:elasticsearch:6.6.1 -p 5601:5601 -d kibana:6.6.1`
 
 3. Edit logstash.conf  
     `$ vi logstash.conf`
