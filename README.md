@@ -14,10 +14,10 @@ docker on Linux or MacOS
 use only docker almost all are docker 
 
 1. Run ElasticSearch  
-    `$ sudo docker run --name es -d  -p 9200:9200 -p 9300:9300  -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" elasticsearch`
+    `$ sudo docker run --name es -d  -p 9200:9200 -p 9300:9300  -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" elasticsearch:6.6.1`
 
 2. Run Kibana  
-    `$ sudo docker run --name kiba --link es:elasticsearch -p 5601:5601 -d kibana`
+    `$ sudo docker run --name kiba --link es:elasticsearch:6.6.1 -p 5601:5601 -d kibana`
 
 3. Edit logstash.conf  
     `$ vi logstash.conf`
@@ -27,10 +27,10 @@ use only docker almost all are docker
 
 
 4. Run logstash  
-    ``$ sudo docker run -d --rm -v "$PWD":/config-dir logstash  -e "`sed -e "s/ES_ADDR/\`docker inspect es -f "{{ .NetworkSettings.IPAddress }}"\`/" logstash.conf`"``
+    ``$ sudo docker run -d --rm -v "$PWD":/config-dir logstash:6.6.1  -e "`sed -e "s/ES_ADDR/\`docker inspect es -f "{{ .NetworkSettings.IPAddress }}"\`/" logstash.conf`"``
 
     (alternative if you want to debug)  
-    ``$ sudo docker run -it --rm -v "$PWD":/config-dir logstash  -e "`sed -e "s/ES_ADDR/\`docker inspect es -f "{{ .NetworkSettings.IPAddress }}"\`/" logstash.conf`"``
+    ``$ sudo docker run -it --rm -v "$PWD":/config-dir logstash:6.6.1  -e "`sed -e "s/ES_ADDR/\`docker inspect es -f "{{ .NetworkSettings.IPAddress }}"\`/" logstash.conf`"``
 
 5. Use  
     wait a few minutes and open http://localhost:5601/ by browser.
